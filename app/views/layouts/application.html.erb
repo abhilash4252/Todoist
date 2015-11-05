@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+  <title>TodoistApp</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker.min.css">
+	
+  <%= csrf_meta_tags %>
+</head>
+<body ng-controller = "todoController as todo">
+<header>
+       <div style="display:inline-flex;">
+   		<i class="fa fa-check"></i>
+   		<h1>Todoist</h1>
+       </div>
+
+   </header>
+   <div class="container">
+   	<div class="row" style="margin-top:13px;">
+   		<div class="col-md-4 left">
+   			<div class="addTask">
+   				<h2>ADD Task</h2>
+   				<form class="form-horizontal" role="form">
+  					<div class="form-group">
+    					<label class="control-label col-sm-5" >Task</label>
+    						<div class="col-sm-7">
+      							<input class="form-control" id="task" placeholder="Todoist Mockups" ng-model="taskName">
+    						</div>
+  					</div>
+  					<div class="form-group">
+    					<label class="control-label col-sm-5" >End Date</label>
+    						<div class="col-sm-7 input-group date" type="text" id='datepicker'>
+      							<input class="form-control" ng-model="endDate" id="date" placeholder="Select Day" />
+      							 <span class="input-group-addon">
+                       				 <span class="glyphicon glyphicon-calendar"></span>
+                    			</span>
+    						</div>
+  					</div>
+  					<div class="form-group">
+    					<label class="control-label col-sm-5" >End Date</label>
+    						<div class="col-sm-7 input-group date" type="text" id='timepicker'>
+                    <input class="form-control" id="date" ng-model="endTime" placeholder="Select Time" />
+                     <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-time"></span>
+                    </span>
+                </div>
+  					</div>
+
+            <div class="form-group">
+              <label class="control-label col-sm-5"></label>
+              <button class="btn btn-primary" type="submit"  ng-click="addTask(taskName,endDate,endTime);">Add Task</button>
+  		      </div>
+		
+    		  </form>
+   			</div>
+   			<div class="days">
+   				<h2>day's summary</h2>
+          <div style="display:inline-flex ;margin-right:10px;text-align:center;">
+          <div style="border:1px solid black;width:100px;height:100px;margin-right:10px">
+            
+          </div>
+          <div style="border:1px solid black;width:100px;height:100px;margin-right:10px">
+            
+          </div>
+          <div style="border:1px solid black;width:100px;height:100px;margin-right:10px">
+            
+          </div>
+          </div>
+   			</div>
+   		</div>
+      <div class="col-md-1"></div>
+   		<div class="col-md-7 right" >
+        <div>
+   			   <h2>Today - {{date | date : 'd MMM yyyy'}}</h2>
+           <div ng-repeat="task in tasks">
+              
+                  <i class="fa fa-circle redC" ng-if="task.isDelayed"></i>
+                  <i class="fa fa-circle greenC" ng-if="task.isFinished"></i>
+                  <i class="fa fa-circle-thin grrenB" ng-if="!task.isFinished && !task.isDelayed"></i>
+
+           
+              <span ng-bind="task.name" class="taskName"></span>
+              <span ng-bind="task.time" class="taskTime"></span>
+              <span class="delayTime"ng-if="task.isDelayed">
+                [DELAY: {{task.timeDelay}}]
+              </span>
+           </div>
+         </div>
+         <div>
+           <h2>{{date | date : 'd MMM yyyy'}}</h2>
+           <div ng-repeat="task in yesTasks">
+              
+                  <i class="fa fa-circle redC" ng-if="task.isDelayed"></i>
+                  <i class="fa fa-circle greenC" ng-if="task.isFinished"></i>
+                  <i class="fa fa-circle-thin grrenB" ng-if="!task.isFinished && !task.isDelayed"></i>
+
+           
+              <span ng-bind="task.name" class="taskName"></span>
+              <span ng-bind="task.time" class="taskTime"></span>
+              <span class="delayTime"ng-if="task.isDelayed">
+                [DELAY: {{task.timeDelay}}]
+              </span>
+           </div>
+         </div>
+   		</div>
+   	</div>
+   	
+   </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<script type="text/javascript">
+            $(document).ready(function() {
+                $('#datepicker').datepicker();
+               $('#timepicker').timepicker();
+
+            });
+</script>
+</body>
+</html>
