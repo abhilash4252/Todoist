@@ -1,0 +1,10 @@
+<%	provide(:title,	'DB')	%>
+
+<ul	class="users">
+		<%	@todos.each	do	|todo|	%>
+				<li>
+						hi
+						<%=	link_to	todo.name,	todo	%>
+				</li>
+		<%	end	%>
+</ul>

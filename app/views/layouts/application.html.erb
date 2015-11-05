@@ -4,6 +4,7 @@
   <title>TodoistApp</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker.min.css">
 	
@@ -76,31 +77,32 @@
    			   <h2>Today - {{date | date : 'd MMM yyyy'}}</h2>
            <div ng-repeat="task in tasks">
               
-                  <i class="fa fa-circle redC" ng-if="task.isDelayed"></i>
+                  <i class="fa fa-circle redC" ng-if="isDelayed(task) && !task.isFinished" ng-click="markAsFinished(task)" ></i>
                   <i class="fa fa-circle greenC" ng-if="task.isFinished"></i>
-                  <i class="fa fa-circle-thin grrenB" ng-if="!task.isFinished && !task.isDelayed"></i>
+                  <i class="fa fa-circle-thin grrenB" ng-if="!task.isFinished && !isDelayed(task)" ng-click="markAsFinished(task)">
+                  </i>
 
            
               <span ng-bind="task.name" class="taskName"></span>
               <span ng-bind="task.time" class="taskTime"></span>
-              <span class="delayTime"ng-if="task.isDelayed">
-                [DELAY: {{task.timeDelay}}]
+              <span class="delayTime" ng-if="isDelayed(task)">
+                [DELAY: {{timeDelay}}]
               </span>
            </div>
          </div>
          <div>
-           <h2>{{date | date : 'd MMM yyyy'}}</h2>
+           <h2>{{yesterday | date : 'd MMM yyyy'}}</h2>
            <div ng-repeat="task in yesTasks">
               
-                  <i class="fa fa-circle redC" ng-if="task.isDelayed"></i>
+                  <i class="fa fa-circle redC" ng-if="isDelayed(task)"></i>
                   <i class="fa fa-circle greenC" ng-if="task.isFinished"></i>
-                  <i class="fa fa-circle-thin grrenB" ng-if="!task.isFinished && !task.isDelayed"></i>
+                  <i class="fa fa-circle-thin grrenB" ng-if="!task.isFinished && !isDelayed(task)"></i>
 
            
               <span ng-bind="task.name" class="taskName"></span>
               <span ng-bind="task.time" class="taskTime"></span>
-              <span class="delayTime"ng-if="task.isDelayed">
-                [DELAY: {{task.timeDelay}}]
+              <span class="delayTime"ng-if="isDelayed(task)">
+                [DELAY: {{timeDelay}}]
               </span>
            </div>
          </div>
