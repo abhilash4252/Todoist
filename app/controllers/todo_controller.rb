@@ -1,4 +1,5 @@
 class TodoController < ApplicationController
+  skip_before_action :verify_authenticity_token
   before_action :set_todo, only: [:show, :update, :destroy]
   def index
   	@todos =Todo.all
@@ -11,18 +12,22 @@ class TodoController < ApplicationController
   
   def create
   	@todo = Todo.new(todo_params)
+    @todo.save
 
-  	render json: @todo
+      render json: @todo
+
   end
 
   def update
   	@todo = Todo.find(params[:id])
-  	heaad :no_content
+    @todo.update(todo_params)
+  	
   end
 
   def destroy
+    @todo = Todo.find(params[:id])
   	@todo.destroy
-  	head :no_content
+  	
 end
 
   private

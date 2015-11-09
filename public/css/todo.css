@@ -59,6 +59,7 @@ header {
     color:grey;
     font-weight:bold;
     opacity:0.5;
+    margin-left:10px;
 }
 .white {
     background-color: white;
@@ -81,6 +82,7 @@ header {
 .taskTime {
     font-size: 20px;
     font-weight: bold;
+    margin-left:10px;
 }
 .days {
     text-align: center;

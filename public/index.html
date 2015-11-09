@@ -61,15 +61,27 @@
    			<div class="days">
    				<h2>day's summary</h2>
           <div style="display:inline-flex ;margin-right:10px;text-align:center;">
-          <div style="border:1px solid black;width:100px;height:100px;margin-right:10px">
+               <div style="border:1px solid black;width:100px;height:100px;margin-right:10px;font-size:5em;font-weight:bold"
+               ng-bind="newTaskCount">
+                {{newTaskCount}}
+              </div>
+               <div style="border:1px solid black;width:100px;height:100px;margin-right:10px;font-size:5em;font-weight:bold">
+               {{delayedTaskCount}}
+               </div>
+               <div style="border:1px solid black;width:100px;height:100px;margin-right:10px">
             
+                </div>
           </div>
-          <div style="border:1px solid black;width:100px;height:100px;margin-right:10px">
+          <div style="display:inline-flex ;margin-right:10px;text-align:center;">
+                <div style="width:100px;height:100px;margin-right:10px;font-size:1.2em;font-weight:italic">
+                New Tasks
+                </div>
+               <div style="width:100px;height:100px;margin-right:10px;font-size:1.2em ;font-weight:italic">
+                 Delayed 
+                </div>
+                 <div style="width:100px;height:100px;margin-right:10px">
             
-          </div>
-          <div style="border:1px solid black;width:100px;height:100px;margin-right:10px">
-            
-          </div>
+                 </div>
           </div>
    			</div>
    		</div>
@@ -77,7 +89,7 @@
    		<div class="col-md-7 right" >
         <div>
    			   <h2>Today - {{date | date : 'd MMM yyyy'}}</h2>
-           <div ng-repeat="task in tasks">
+           <div ng-repeat="task in tasks | orderBy: 'endDate'">
               
                   <i class="fa fa-circle redC" ng-if="isDelayed(task) && !task.isFinished" ng-click="markAsFinished(task)" ></i>
                   <i class="fa fa-circle greenC" ng-if="task.isFinished"></i>
@@ -86,11 +98,11 @@
 
            
               <span ng-bind="task.name" class="taskName"></span>
-              <span ng-bind="task.time" class="taskTime"></span>
+              <span ng-bind="task.endTime" class="taskTime"></span>
               <span class="delayTime" ng-if="isDelayed(task)">
-                [DELAY: {{timeDelay}}]
+                [DELAY: {{timeDelay(task)}}]
               </span>
-           </div>
+            </div>
          </div>
          <div>
            <h2>{{yesterday | date : 'd MMM yyyy'}}</h2>
@@ -102,9 +114,8 @@
 
            
               <span ng-bind="task.name" class="taskName"></span>
-              <span ng-bind="task.time" class="taskTime"></span>
-             
-           </div>
+              <span ng-bind="task.endTime" class="taskTime"></span>
+             </div>
          </div>
    		</div>
    	</div>
