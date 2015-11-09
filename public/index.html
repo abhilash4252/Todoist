@@ -9,7 +9,8 @@
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker.min.css">
   <link rel="stylesheet" type="text/css" href="./css/todo.css" />
-	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/bootstrap.timepicker/0.2.6/css/bootstrap-timepicker.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/bootstrap.timepicker/0.2.6/css/bootstrap-timepicker.css">
   
 </head>
 <body ng-controller = "todoController as todo">
@@ -43,8 +44,8 @@
   					</div>
   					<div class="form-group">
     					<label class="control-label col-sm-5" >End Date</label>
-    						<div class="col-sm-7 input-group date" type="text" id='timepicker'>
-                    <input class="form-control" id="date" ng-model="endTime" placeholder="Select Time" />
+    						<div class="col-sm-7 input-group bootstrap-timepicker timepicker" type="text" >
+                    <input class="form-control" id="timepicker" type="text" ng-model="endTime" placeholder="Select Time" />
                      <span class="input-group-addon">
                             <span class="glyphicon glyphicon-time"></span>
                     </span>
@@ -128,13 +129,19 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<script src="https://cdn.jsdelivr.net/bootstrap.timepicker/0.2.6/js/bootstrap-timepicker.min.js"></script>
+<script src="https://cdn.jsdelivr.net/bootstrap.timepicker/0.2.6/js/bootstrap-timepicker.js"></script>
+ <script type="text/javascript" src="./js/app.js"></script>
 <script type="text/javascript">
             $(document).ready(function() {
                 $('#datepicker').datepicker();
-               $('#timepicker').timepicker();
+               $('#timepicker').timepicker({
+                showMeridian: false,
+                defaultTime: false
+               });
 
             });
 </script>
- <script type="text/javascript" src="./js/app.js"></script>
+
 </body>
 </html>
